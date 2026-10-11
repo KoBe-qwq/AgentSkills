@@ -5,6 +5,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Agent Skills 大全 — AI Agent 技能收藏库</title>
+<link rel="icon" type="image/svg+xml" href="logo.svg">
+<meta name="theme-color" content="#0a0a0f">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -82,6 +84,21 @@
   .hero {
     padding: 80px 0 60px;
     text-align: center;
+  }
+  .hero-logo {
+    width: 96px;
+    height: 96px;
+    border-radius: 24px;
+    margin-bottom: 28px;
+    box-shadow: 0 16px 48px rgba(139, 92, 246, 0.45), 0 4px 16px rgba(6, 182, 212, 0.25);
+    animation: logoFloat 4.5s ease-in-out infinite;
+  }
+  @keyframes logoFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-7px); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-logo { animation: none; }
   }
   .hero-badge {
     display: inline-flex;
@@ -701,6 +718,7 @@
 <div class="container">
   <!-- Hero -->
   <header class="hero">
+    <img src="logo.svg" alt="Agent Skills 大全 Logo" class="hero-logo" width="96" height="96">
     <div class="hero-badge">
       <span class="dot"></span>
       <span>持续更新 · 精选收录</span>
@@ -1296,15 +1314,48 @@ function closeModal(event) {
 
 function copyCode(btn) {
   const codeBlock = btn.parentElement;
-  const codeText = codeBlock.innerText.replace('复制\n', '').replace('已复制\n', '').trim();
-  navigator.clipboard.writeText(codeText).then(() => {
+  // Get the actual code text (exclude the button text)
+  let codeText = '';
+  codeBlock.childNodes.forEach(node => {
+    if (node.nodeType === Node.TEXT_NODE) {
+      codeText += node.textContent;
+    }
+  });
+  codeText = codeText.trim();
+  
+  const showCopied = () => {
     btn.textContent = '已复制';
     btn.classList.add('copied');
     setTimeout(() => {
       btn.textContent = '复制';
       btn.classList.remove('copied');
     }, 2000);
-  });
+  };
+  
+  // Try modern clipboard API first
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(codeText).then(showCopied).catch(() => {
+      fallbackCopy(codeText, showCopied);
+    });
+  } else {
+    fallbackCopy(codeText, showCopied);
+  }
+}
+
+function fallbackCopy(text, callback) {
+  const textarea = document.createElement('textarea');
+  textarea.value = text;
+  textarea.style.position = 'fixed';
+  textarea.style.opacity = '0';
+  document.body.appendChild(textarea);
+  textarea.select();
+  try {
+    document.execCommand('copy');
+    callback();
+  } catch (e) {
+    console.warn('Copy failed', e);
+  }
+  document.body.removeChild(textarea);
 }
 
 function escapeHtml(text) {

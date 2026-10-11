@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" fill="none">
+  <defs>
+    <linearGradient id="tile" x1="14" y1="10" x2="114" y2="118" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#a78bfa"/>
+      <stop offset="0.5" stop-color="#8b5cf6"/>
+      <stop offset="1" stop-color="#06b6d4"/>
+    </linearGradient>
+    <linearGradient id="sheen" x1="64" y1="10" x2="64" y2="118" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.22"/>
+      <stop offset="0.45" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect x="10" y="10" width="108" height="108" rx="28" fill="url(#tile)"/>
+  <rect x="10" y="10" width="108" height="108" rx="28" fill="url(#sheen)"/>
+  <rect x="10.75" y="10.75" width="106.5" height="106.5" rx="27.25" stroke="#ffffff" stroke-opacity="0.14" stroke-width="1.5"/>
+  <path d="M55 30 Q61.5 51.5 76 58 Q61.5 64.5 55 86 Q48.5 64.5 34 58 Q48.5 51.5 55 30 Z" fill="#ffffff"/>
+  <path d="M92 33 Q94.6 41.4 103 44 Q94.6 46.6 92 55 Q89.4 46.6 81 44 Q89.4 41.4 92 33 Z" fill="#ffffff" fill-opacity="0.9"/>
+  <path d="M91 74 Q92.9 80.1 99 82 Q92.9 83.9 91 90 Q89.1 83.9 83 82 Q89.1 80.1 91 74 Z" fill="#ffffff" fill-opacity="0.6"/>
+</svg>
